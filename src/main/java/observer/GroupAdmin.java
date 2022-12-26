@@ -8,45 +8,57 @@ import java.util.ArrayList;
  */
 public class GroupAdmin implements Sender{
     private UndoableStringBuilder usb;
-    private ArrayList<Member> concreteMembers;
+    private ArrayList<Member> members;
+
+    public GroupAdmin(){
+        this.usb = new UndoableStringBuilder();
+        this.members = new ArrayList<Member>();
+    }
+    public GroupAdmin(UndoableStringBuilder usb){
+        this.usb = usb;
+        this.members = new ArrayList<Member>();
+    }
 
     @Override
     public void register(Member obj) {
-        this.concreteMembers.add(obj);
+        this.members.add(obj);
+        /* Let this member get the updated UndoableStringBuilder */
+        notifyAll(this.usb);
     }
 
     @Override
     public void unregister(Member obj) {
-        this.concreteMembers.remove(obj);
+        this.members.remove(obj);
     }
 
     @Override
     public void insert(int offset, String obj) {
         this.usb.insert(offset, obj);
-        updateUSB(this.usb);
+        notifyAll(this.usb);
     }
 
     @Override
     public void append(String obj) {
         this.usb.append(obj);
-        updateUSB(this.usb);
+        notifyAll(this.usb);
     }
 
     @Override
     public void delete(int start, int end) {
         this.usb.delete(start, end);
-        updateUSB(this.usb);
+//        notifyAll(this.usb);
     }
 
     @Override
     public void undo() {
         this.usb.undo();
-        updateUSB(this.usb);
+        notifyAll(this.usb);
     }
 
-    public void updateUSB(UndoableStringBuilder usb){
-        for (Member member:concreteMembers) {
-            member.update(usb);
+    public void notifyAll(UndoableStringBuilder usb){
+        this.usb = usb;
+        for (Member member: members){
+            member.update(this.usb);
         }
     }
 
@@ -56,13 +68,14 @@ public class GroupAdmin implements Sender{
 
     public void setUsb(UndoableStringBuilder usb) {
         this.usb = usb;
+        notifyAll(this.usb);
     }
 
-    public ArrayList<Member> getConcreteMembers() {
-        return concreteMembers;
+    public ArrayList<Member> getMembers() {
+        return members;
     }
 
-    public void setConcreteMembers(ArrayList<Member> concreteMembers) {
-        this.concreteMembers = concreteMembers;
+    public void setMembers(ArrayList<Member> members) {
+        this.members = members;
     }
 }

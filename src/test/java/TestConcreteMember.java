@@ -6,7 +6,7 @@ public class TestConcreteMember{
     public static final Logger logger = LoggerFactory.getLogger(Tests.class);
 
     @Test
-    public void test(){
+    public void testUpdate(){
 
 
     }
