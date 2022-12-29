@@ -4,6 +4,10 @@ package observer;
 public class ConcreteMember implements Member{
     private UndoableStringBuilder usb;
 
+    /**
+     *
+     * @param usb
+     */
     @Override
     public void update(UndoableStringBuilder usb) {
         this.usb = usb;
@@ -26,4 +30,7 @@ public class ConcreteMember implements Member{
         this.usb = usb;
     }
 
+    public String toString(){
+        return this.usb.toString();
+    }
 }
