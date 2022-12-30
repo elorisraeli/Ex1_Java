@@ -207,5 +207,65 @@ public class Tests {
         System.out.println("Done updateAll");
     }
 
+    /**
+     * This test is to check the update method in ConcreteMember class
+     * The test is to check if the member is updated after the update method is called
+     */
+    @Test
+    void update() {
+        ConcreteMember concreteMember1 = new ConcreteMember();
+        ConcreteMember concreteMember2 = new ConcreteMember();
+        ConcreteMember concreteMember3 = new ConcreteMember();
+        ConcreteMember concreteMember4 = new ConcreteMember();
+        groupAdmin.register(concreteMember1);
+        groupAdmin.register(concreteMember2);
+        groupAdmin.register(concreteMember3);
+        groupAdmin.register(concreteMember4);
+        usb.append("to be or not to be");
+        concreteMember1.update(usb);
+        concreteMember3.update(usb);
+        assertEquals(concreteMember1.getUsb(), usb);
+        assertNotEquals(concreteMember2.getUsb(), usb);
+        assertEquals(concreteMember3.getUsb(), usb);
+        assertNotEquals(concreteMember4.getUsb(), usb);
+        System.out.println("Done update");
+    }
 
-}
+    /**
+     * This test is to check the append method in GroupAdmin class
+     * check if the members get updated after the append method is called
+     */
+    @Test
+    void extraTest(){
+        ConcreteMember concreteMember1 = new ConcreteMember();
+        ConcreteMember concreteMember2 = new ConcreteMember();
+        ConcreteMember concreteMember3 = new ConcreteMember();
+        ConcreteMember concreteMember4 = new ConcreteMember();
+        groupAdmin.register(concreteMember1);
+        groupAdmin.register(concreteMember2);
+        groupAdmin.register(concreteMember3);
+        groupAdmin.register(concreteMember4);
+        groupAdmin.append("Extra text in the USB");
+        assertEquals(groupAdmin.getUsb(), usb);
+        assertEquals(concreteMember1.getUsb(), usb);
+        assertEquals(concreteMember2.getUsb(), usb);
+        assertEquals(concreteMember3.getUsb(), usb);
+        assertEquals(concreteMember4.getUsb(), usb);
+        System.out.println("Done extraTest");
+    }
+
+    @Test
+    void memorySize(){
+        ConcreteMember concreteMember1 = new ConcreteMember();
+        ConcreteMember concreteMember2 = new ConcreteMember();
+        groupAdmin.append("Extra text in the USB");
+        groupAdmin.register(concreteMember1);
+        concreteMember1.update(groupAdmin.getUsb());
+        logger.info(()->JvmUtilities.objectTotalSize(concreteMember1));
+        System.out.println("The member with the usb is bigger then the member without the usb?");
+        logger.info(()->JvmUtilities.objectTotalSize(concreteMember2));
+        System.out.println("Yes.");
+        System.out.println("Done memorySize");
+    }
+
+} // End of Test class
