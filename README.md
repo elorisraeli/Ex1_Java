@@ -15,6 +15,7 @@ To run by yourself the code, click on the green table with the text "Code", then
 Go to your path where you download the file and extract the files to your computer, than open the file as a project in your IDE.
 
 ## Usage
-To see how the communication between the classes works you can run the Main java class and to understand by the code the details.
+To see how the communication between the classes works you can run the Test class in the path: "src/test/java/Tests.java" and to understand by the code the details.
+
 ## Contributing
 Elor Israeli and Roni Michaeli
