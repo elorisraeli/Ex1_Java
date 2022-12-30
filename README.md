@@ -17,4 +17,4 @@ Go to your path where you download the file and extract the files to your comput
 ## Usage
 To see how the communication between the classes works you can run the Main java class and to understand by the code the details.
 ## Contributing
-Elor Israeli and Roni Micheali
+Elor Israeli and Roni Michaeli
